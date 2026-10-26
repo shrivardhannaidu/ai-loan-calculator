@@ -1,147 +1,168 @@
-# 🏦 CrediPulse.AI — Intelligent BFSI Loan Eligibility & Financial Platform
+<div align="center">
 
-> **Academic Project Submission**  
-> **Domain:** Banking, Financial Services & Insurance (BFSI) / FinTech  
-> **Tech Stack:** HTML5, CSS3 (Dark Glassmorphism), Vanilla JavaScript (ES6+), Anthropic Claude 3.5 AI, Google Sheets API (Google Apps Script), Chart.js.
+# 🏦 AI Loan Eligibility Checker (BFSI)
 
----
+**An AI-powered web platform for smarter financial decisions**
 
-## 📌 Executive Summary / Abstract
+Dark glassmorphism UI · Claude AI · Google Sheets storage
 
-In modern retail banking and financial services, personal loan, mortgage, and auto loan underwriting often suffers from opaque approval criteria, slow manual assessment, and fragmented financial tools. 
-
-**CrediPulse.AI** is an AI-powered, single-interface BFSI web platform engineered to streamline consumer financial decision-making. Featuring a **futuristic 3D WebGL holographic cockpit** and **dark glassmorphism aesthetic**, the platform unifies four essential banking modules:
-1. **Interactive 3D WebGL Holographic Canvas:** Powered by **Three.js**, rendering a rotating cyan wireframe Torus Knot, floating icosahedron crystals, an 850-particle cyber constellation, and a dynamic 3D camera that tilts smoothly with cursor parallax.
-2. **True 3D Interactive Card Parallax Tilt:** Every glassmorphism card physicalizes with gyroscopic 3D perspective (`perspective: 1200px`), multi-layer Z-depth elevation (`transform: translateZ(30px)`), and moving specular light reflections (dynamic glare sheen).
-3. **AI Loan Eligibility Checker:** Calculates applicant borrowing capacity using real-world **FOIR (Fixed Obligation to Income Ratio)**, debt-to-income benchmarks, and a multi-factor approval prediction algorithm.
-4. **Credit Score & Risk Analyzer:** Features an interactive semi-circular gauge meter with metallic 3D bezel, 5 weighted credit pillar breakdowns, and an interactive **"What-If" credit scenario simulator**.
-5. **Advanced EMI & Amortization Calculator:** Delivers real-time monthly EMI computation, a Chart.js donut chart of principal vs. interest, prepayment optimization modeling, and full monthly/yearly amortization tables with CSV export.
-6. **Claude AI Financial Intelligence Advisor:** Leverages Anthropic's Claude 3.5 Sonnet generative AI API combined with an autonomous offline BFSI heuristic expert engine to generate tailored loan restructuring advice and 360° financial diagnostics.
-7. **Google Sheets Cloud Storage:** Dynamically persists, retrieves, and syncs applicant financial dossiers to any Google Sheet in real time via an asynchronous Google Apps Script Webhook.
+</div>
 
 ---
 
-## 📐 Mathematical Models & BFSI Underwriting Formulas
+## ✨ Features
 
-### 1. Equated Monthly Installment (EMI) Formula
-The monthly loan payment is derived from standard compound interest amortization:
+| Module | Description |
+|---|---|
+| ✅ **Loan Eligibility Checker** | Eligibility, approval score, interest rate, EMI and maximum loan |
+| 📊 **Credit Score Analyzer** | Estimated score (300–900) with risk band and AI improvement tips |
+| 🧮 **EMI Calculator** | Real-time EMI, total interest and total payable with sliders |
+| 🤖 **AI Financial Tips** | Ask Claude any question about loans, savings, credit or insurance |
 
-$$E = P \times r \times \frac{(1 + r)^n}{(1 + r)^n - 1}$$
+## 🧱 Tech Stack
+**Frontend:** HTML, CSS, JavaScript · **Backend:** Node.js, Express · **AI:** Anthropic Claude API · **Database:** Google Sheets (Apps Script)
 
-Where:
-- $E$ = Monthly Loan EMI
-- $P$ = Principal Loan Amount
-- $r$ = Monthly interest rate ($\frac{\text{Annual Rate}}{12 \times 100}$)
-- $n$ = Loan tenure in total months ($\text{Years} \times 12$)
+## 📁 Structure
+- `public/` frontend (HTML, CSS, JS)
+- `server.js` Node/Express backend (Claude proxy + Sheets proxy; keys stay server-side)
+- `apps-script/Code.gs` Google Sheets backend
 
----
+## 🚀 Setup
+1. Google Sheet > Extensions > Apps Script > paste `Code.gs`, set `SECRET` > Deploy > Web app (Execute as: Me, Access: Anyone) > copy URL.
+2. `cp .env.example .env` and fill in `ANTHROPIC_API_KEY` (console.anthropic.com), `SHEET_URL`, `SHEET_SECRET`.
+3. `npm install && npm start` then open http://localhost:3000
 
-### 2. Fixed Obligation to Income Ratio (FOIR)
-In commercial banking underwriting, FOIR determines the percentage of an applicant's net income dedicated to servicing debt obligations:
+> Quick look without setup: double-click `public/index.html`. The calculators work; AI and Sheets need the server.
 
-$$\text{FOIR} = \left( \frac{\text{Existing Monthly EMIs} + \text{Proposed New Loan EMI}}{\text{Net Monthly Disposable Income}} \right) \times 100$$
+## 📤 Push to GitHub
+```
+git init && git add . && git commit -m "Initial commit"
+git branch -M main
+git remote add origin https://github.com/YOUR_USERNAME/ai-loan-checker.git
+git push -u origin main
+```
+`.env` is git-ignored, so never commit keys.
 
-- **Safe Zone (≤ 50%):** Standard automated retail approval threshold.
-- **Caution Zone (50% – 60%):** Requires additional collateral, tenure extension, or co-borrower.
-- **High Risk (> 60%):** Breaches permissible debt capacity; flagged for conditional review or rejection.
-
----
-
-### 3. Maximum Eligible Loan Capacity (Reverse EMI)
-The maximum loan capital a bank can safely disburse is calculated inversely:
-
-$$\text{Max Available Monthly EMI} = (\text{Total Income} \times \text{Permissible FOIR Cap}) - \text{Existing EMIs}$$
-
-$$\text{Max Eligible Loan} = \text{Max Available Monthly EMI} \times \frac{(1 + r)^n - 1}{r \times (1 + r)^n}$$
-
----
-
-### 4. Multi-Factor Approval Probability Matrix
-Approval probability ($0\% - 100\%$) is calculated across 5 weighted credit risk dimensions:
-- **Credit Bureau Score (35% Weight):** Tiered scoring based on CIBIL/FICO rating.
-- **FOIR / Debt Burden (30% Weight):** Safety margin below the 50% cap.
-- **Employment Stability (15% Weight):** Categorized by PSU/Govt, Corporate MNC, Self-Employed Professional, or Business Owner.
-- **Retirement / Age Margin (10% Weight):** Buffer between loan maturity and retirement age (60-65 years).
-- **Co-Borrower Presence (10% Weight):** Co-applicant income inclusion increases allowable FOIR cap by +5%.
+## ☁️ Deploy (GitHub Pages can't run Node)
+Render.com > New Web Service > connect repo > Build `npm install`, Start `npm start` > add the 4 env vars.
 
 ---
 
-## 🌟 Core Modules & Architecture
+# 📄 Project Report
+
+**Domain:** BFSI (Banking, Financial Services & Insurance)
+**Technologies:** HTML, CSS, JavaScript, Node.js, Express, Anthropic Claude API, Google Sheets (Apps Script)
+
+## 1. Abstract
+The AI Loan Eligibility Checker is a web platform that helps users make quick personal-finance decisions. It combines four tools in one interface: a Loan Eligibility Checker, a Credit Score Analyzer, an EMI Calculator and AI Financial Tips. Results are generated instantly in the browser, Claude AI adds personalized recommendations, and user records are stored in Google Sheets.
+
+## 2. Problem Statement
+Many people do not know whether they qualify for a loan, what their credit health looks like, or what their monthly repayment will be until they visit a bank. This causes failed applications, unnecessary credit enquiries and poor borrowing decisions. A free, instant, easy-to-use tool can fix this.
+
+## 3. Objectives
+- Build modules for loan eligibility, credit score analysis, EMI calculation and AI tips
+- Design a responsive dark glassmorphism interface
+- Validate all user inputs with JavaScript
+- Predict loan eligibility from income, age, credit score and employment
+- Calculate EMI in real time using the standard financial formula
+- Integrate the Claude AI API for intelligent guidance
+- Store and retrieve records using Google Sheets
+- Keep API keys and data private through a secure backend
+
+## 4. System Architecture
 
 ```
-ai-loan-eligibility-checker/
-│
-├── index.html                  # Single-Page Application with responsive dark glassmorphism layout
-│
-├── css/
-│   ├── style.css               # Core styling, ambient radial glow orbs, CSS variables, typography
-│   └── components.css          # Glassmorphism cards, sliders, gauges, radial meters, chat & modals
-│
-├── js/
-│   ├── app.js                  # App coordinator, currency engine (INR/USD/EUR/GBP), toast system
-│   ├── loan-checker.js         # BFSI underwriting algorithm, FOIR/DTI logic & decision engine
-│   ├── credit-analyzer.js      # Speedometer SVG gauge, 5 credit pillars, What-If simulator, quiz
-│   ├── emi-calculator.js       # EMI financial math, Chart.js donut chart, amortization table & CSV
-│   ├── ai-advisor.js           # Anthropic Claude 3.5 API client + offline BFSI neural heuristic
-│   └── storage.js              # Google Sheets Webhook dispatcher, localStorage DB & CSV exporter
-│
-├── google-sheets/
-│   ├── Code.gs                 # Google Apps Script for automated cloud sheet appending & styling
-│   └── SETUP_GUIDE.md          # 2-minute step-by-step setup documentation for Google Sheets
-│
-└── README.md                   # Complete academic documentation and viva preparation guide
+ Browser (HTML/CSS/JS)
+        │
+        ▼
+ Node.js + Express server  ──►  Anthropic Claude API   (AI advice)
+        │
+        └──────────────────►  Google Apps Script  ──►  Google Sheet (records)
 ```
 
+The browser never talks to Claude or Google directly. The Express server holds the secrets and forwards requests, which protects the API key.
+
+## 5. Modules
+
+| # | Module | What it does |
+|---|--------|--------------|
+| 1 | **Loan Eligibility Checker** | Takes name, age, income, employment, credit score, existing EMIs and loan details. Returns eligibility, approval score, estimated rate, EMI and maximum loan. Saves each check to Google Sheets. |
+| 2 | **Credit Score Analyzer** | Estimates a score from 300 to 900 and a risk band using payment history, utilization, history length, enquiries and accounts. |
+| 3 | **EMI Calculator** | Live sliders for amount, rate and tenure. Shows monthly EMI, total interest and total payable. |
+| 4 | **AI Financial Tips** | Free-text questions answered by Claude, plus automatic tips after each eligibility check and credit analysis. |
+
+## 6. Methodology and Formulas
+
+**EMI formula**
+
+`EMI = P × r × (1 + r)^n / ((1 + r)^n − 1)`
+
+where P = principal, r = monthly rate (annual rate / 12 / 100), n = number of months.
+
+**Maximum loan** (reverse of EMI): `P = EMI × ((1 + r)^n − 1) / (r × (1 + r)^n)`
+
+**Eligibility rules**
+- Age between 21 and 60, and not unemployed
+- Credit score of 650 or more
+- Total EMIs must stay within **50% of monthly income** (FOIR rule)
+
+**Interest rate by credit score**
+
+| Credit score | Estimated rate |
+|---|---|
+| 750 and above | 9.5% |
+| 700 to 749 | 11% |
+| 650 to 699 | 13% |
+| Below 650 | 16% |
+
+**Credit score weights:** payment history 35%, utilization 30%, history length 15%, enquiries 10%, account mix 10%.
+
+## 7. Implementation Highlights
+- **Frontend:** single-page layout with tabs, glass cards, animated background and smooth transitions; responsive for desktop and mobile
+- **Validation:** regex for names, range checks for age, score, percentages and amounts
+- **Backend:** `server.js` exposes `/api/ai` and `/api/records`
+- **Storage:** `Code.gs` runs as a Google Apps Script web app and appends rows to a Sheet
+- **Security:** secrets live in `.env` (git-ignored); the Sheet endpoint requires a shared secret; output is HTML-escaped to prevent XSS
+
+## 8. Testing
+
+| Test | Input | Expected | Result |
+|---|---|---|---|
+| EMI calculation | ₹5,00,000, 10.5%, 5 years | about ₹10,748 per month | Pass |
+| Age validation | Age 17 | Error shown | Pass |
+| Score validation | Credit score 1000 | Error shown | Pass |
+| Empty form | No inputs | Error shown | Pass |
+| Low score | Score 600 | Not eligible | Pass |
+| Unemployed | Employment: Unemployed | Not eligible | Pass |
+| Real-time EMI | Move sliders | Values update instantly | Pass |
+| AI tips | Question submitted | Claude response shown | Needs API key |
+| Sheets storage | Run an eligibility check | New row in Sheet | Needs Sheet setup |
+
+## 9. Results
+The platform delivers instant eligibility decisions, EMI figures and credit insights, then adds plain-language AI guidance. Every eligibility check is saved and shown in the "Recent checks" table.
+
+## 10. Limitations
+- The eligibility and credit score logic is a simplified model, not a real bank or credit-bureau algorithm
+- Results are estimates only and are not financial advice
+- No user login; the Sheet stores all checks together
+- AI answers depend on the Anthropic API key and account credit
+
+## 11. Future Scope
+- User accounts and login
+- Charts and amortization schedule for EMI
+- Real credit bureau integration
+- Multiple loan types (home, car, education) with different rules
+- Multi-language support and PDF download of results
+
+## 12. Conclusion
+The project shows how simple web technologies and AI can make financial decisions easier. It meets the stated objectives: four working modules, validated forms, a modern responsive interface, Claude AI integration and persistent storage in Google Sheets.
+
+## 13. References
+- Anthropic API documentation: https://docs.claude.com
+- Google Apps Script documentation: https://developers.google.com/apps-script
+- Express.js: https://expressjs.com
+- MDN Web Docs: https://developer.mozilla.org
+
 ---
 
-## 💻 Tech Stack & Tools
-
-| Component | Technology | Rationale |
-|---|---|---|
-| **Frontend Markup** | HTML5 Semantic Elements | High accessibility, zero build step needed |
-| **Styling & Theme** | CSS3 (Dark Glassmorphism) | `backdrop-filter: blur(20px)`, glowing neon accents |
-| **Business Logic** | Vanilla JavaScript (ES6+) | Native performance, modular code, zero frameworks |
-| **Visual Charts** | Chart.js 4.4 + Inline SVG | Responsive principal vs interest donut visualizer |
-| **Micro-Animations** | Canvas-Confetti | Joyful visual celebration on prime loan approvals |
-| **Generative AI** | Anthropic Claude 3.5 Sonnet | Real-time financial advisory & loan optimization |
-| **Cloud Database** | Google Sheets & Apps Script | Transparent, zero-cost, persistent spreadsheet storage |
-| **Local Fallback** | HTML5 LocalStorage API | 100% offline functionality during viva presentations |
-
----
-
-## 🚀 How to Run the Project Locally
-
-No `npm install` or complex build tools are required!
-
-### Option 1: Direct Browser Launch
-1. Navigate to the project directory:
-   ```
-   C:\Users\Shrivardhan\.gemini\antigravity\scratch\ai-loan-eligibility-checker\
-   ```
-2. Double-click **`index.html`** to launch it in any modern browser (Chrome, Edge, Firefox, Safari).
-
-### Option 2: Local HTTP Server (Recommended)
-Using Python or PowerShell:
-```powershell
-# From the project directory:
-python -m http.server 8080
-# Or using Node.js:
-npx serve .
-```
-Then visit `http://localhost:8080` in your browser.
-
----
-
-## 🎓 Academic Viva Questions & Answers
-
-**Q1: Why did you choose a Dark Glassmorphism aesthetic?**  
-*Answer:* Dark glassmorphism offers a cutting-edge aesthetic suited for FinTech and BFSI platforms. Frosted translucent panels (`backdrop-filter: blur(20px)`) reduce visual clutter, increase contrast for numeric data points, and highlight critical financial indicators through glowing neon accents.
-
-**Q2: How does the application handle Google Sheets integration without a dedicated backend server?**  
-*Answer:* The platform leverages **Google Apps Script deployed as a Web App**. The frontend sends an asynchronous `POST` request with JSON payloads. The Google Apps Script receives the submission via its `doPost(e)` hook, formats table headers if blank, applies conditional cell background coloring, and appends the new record.
-
-**Q3: What happens if there is no internet or no Claude API key available during viva?**  
-*Answer:* The platform is architected with **graceful offline degradation**. If no Anthropic API key is supplied, the platform triggers its **CrediPulse Autonomous BFSI Heuristic Engine**. This built-in expert system parses user queries and eligibility numbers to produce formatted, contextual financial strategies with zero downtime.
-
-**Q4: What is FOIR and why is it preferred over simple Debt-to-Income (DTI)?**  
-*Answer:* In retail banking, DTI often only considers gross obligations against gross income. **FOIR (Fixed Obligation to Income Ratio)** evaluates verified *net in-hand disposable salary* against all confirmed fixed debt obligations (credit cards, existing personal loans, home mortgages). This gives banks a realistic view of cash-flow solvency.
+<div align="center">Made as a college project · Estimates only, not financial advice</div>
